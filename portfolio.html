@@ -1,0 +1,2099 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Axel CALIX — Portfolio | Design</title>
+  <meta name="description" content="Portfolio d'Axel Calix, designer industriel — projets sélectionnés, démarche et compétences." />
+  <style>
+    /* ====== Design System (Thème clair sable / kaki) ====== */
+    :root {
+      --bg: #f3efe6;          /* fond sable */
+      --panel: #ffffff;       /* cartes claires */
+      --text: #1d1f23;        /* texte foncé */
+      --muted: #56606e;       /* texte secondaire */
+      --line: #e4e0d6;        /* bordures sable clair */
+      --accent: #6f7b3d;      /* kaki principal */
+      --accent-soft: #e5ecd2; /* halo / tags sable-vert */
+      --accent-strong: #4f5a26; /* kaki plus sombre */
+      --radius: 18px;
+      --shadow-soft: 0 18px 45px rgba(70, 64, 50, 0.20);
+    }
+
+    /* ====== Reset + Base ====== */
+    *,*::before,*::after{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    html{ scroll-behavior:smooth; }
+    body{
+      margin:0;
+      padding-top:72px;
+      font-family: "Gill Sans", "Gill Sans MT", "Trebuchet MS",
+                   -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+      font-size:16px;
+      line-height:1.6;
+      color:var(--text);
+      background: linear-gradient(
+        145deg,
+        #f6f1e4 100%,
+        #f3efe6 40%,
+        #e8f0e0 30%
+      );
+      -webkit-font-smoothing:antialiased;
+      text-rendering:optimizeLegibility;
+    }
+    img{ max-width:100%; display:block; }
+    a{ color:inherit; text-decoration:none; }
+    .container{ width:min(1120px, 92vw); margin-inline:auto; }
+    .grid{ display:grid; gap:24px; }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:.6rem;
+      padding:.75rem 1.1rem;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:#ffffff;
+      color:var(--text);
+      font-size:.9rem;
+      font-weight:500;
+      box-shadow:0 1px 2px rgba(0,0,0,.04);
+      transition:
+        box-shadow .22s ease,
+        transform .18s ease,
+        border-color .22s ease,
+        background-color .22s ease;
+      cursor:pointer;
+    }
+    .btn:hover{
+      transform: translateY(-1px);
+      box-shadow:0 10px 25px rgba(0,0,0,.12);
+      border-color: color-mix(in srgb, var(--accent) 40%, var(--line));
+      background:#f7f3ea;
+    }
+    .btn--primary{
+      background:linear-gradient(135deg, var(--accent-strong), var(--accent));
+      border:none;
+      color:white;
+      box-shadow:0 14px 35px rgba(79,90,38,.45);
+    }
+    .btn--primary:hover{
+      background:linear-gradient(135deg, var(--accent), var(--accent-strong));
+    }
+    .btn--ghost{
+      background:rgba(255,255,255,0.8);
+      backdrop-filter: blur(12px);
+    }
+
+    .tag{
+      padding:.35rem .7rem;
+      border:1px solid rgba(148,163,184,.25);
+      border-radius:999px;
+      font-size:.8rem;
+      color:var(--muted);
+      background:rgba(255,255,255,.9);
+      backdrop-filter: blur(12px);
+    }
+
+    /* ====== Header / Navbar ====== */
+    header{
+      position:fixed;
+      top:0;
+      left:0;
+      right:0;
+      z-index:50;
+      backdrop-filter:saturate(130%) blur(14px);
+      background:rgba(248,246,240,0.96);
+      border-bottom:1px solid rgba(228,224,214,.9);
+      box-shadow:0 12px 30px rgba(0,0,0,.08);
+    }
+    .nav{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:.75rem 0;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:.75rem;
+    }
+    .logo{
+      width:36px;
+      height:36px;
+      border-radius:13px;
+      background:
+        radial-gradient(circle at 10% 10%, #f9f4e6 0, transparent 55%),
+        radial-gradient(circle at 75% 90%, #dde6c7 0, transparent 55%),
+        linear-gradient(135deg, #4f5a26, #b29c64);
+      box-shadow:0 10px 28px rgba(92,81,52,.55);
+      position:relative;
+      overflow:hidden;
+    }
+    .logo::after{
+      content:"";
+      position:absolute;
+      inset:8px;
+      border-radius:10px;
+      border:1px solid rgba(255,255,255,.6);
+    }
+    .brand h1{
+      margin:0;
+      font-size:.98rem;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      font-weight:600;
+      color:#2b2720;
+    }
+    nav a{
+      font-size:.9rem;
+      color:var(--muted);
+      padding:.55rem .85rem;
+      border-radius:999px;
+      transition: background-color .18s ease, color .18s ease;
+    }
+    nav a:hover,
+    nav a:focus-visible{
+      color:var(--accent-strong);
+      background:rgba(157,145,104,.16);
+    }
+    .right{ display:flex; align-items:center; gap:.5rem; }
+
+    @media (max-width:768px){
+      nav{
+        display:flex;
+        gap:.25rem;
+        background:rgba(255,255,255,.85);
+        padding:.2rem;
+        border-radius:999px;
+        border:1px solid rgba(228,224,214,.9);
+      }
+      .nav{
+        gap:.75rem;
+      }
+    }
+
+    /* ====== Hero ====== */
+    .hero{
+      padding: clamp(52px, 9vw, 96px) 0 40px;
+      position:relative;
+    }
+    .hero::before{
+      content:"";
+      position:absolute;
+      inset:-40px 0 auto;
+      max-width:780px;
+      margin-inline:auto;
+      height:220px;
+      background:
+        radial-gradient(circle at 0 0, rgba(237, 223, 198,.9) 0, transparent 55%),
+        radial-gradient(circle at 100% 100%, rgba(215, 227, 193,.95) 0, transparent 55%);
+      opacity:.65;
+      filter: blur(30px);
+      z-index:-1;
+    }
+    .headline{
+      font-weight:750;
+      letter-spacing:-.04em;
+      line-height:1.02;
+      font-size: clamp(2.4rem, 6vw, 4.4rem);
+      margin: 0 0 16px;
+      color:#1f1c17;
+    }
+    .headline span{
+      background: linear-gradient(120deg, var(--accent-strong), var(--accent));
+      -webkit-background-clip: text;
+      color:transparent;
+    }
+    .sub{
+      color:var(--muted);
+      font-size: clamp(1rem, 2.1vw, 1.22rem);
+      max-width: 70ch;
+    }
+
+    /* ====== Sections ====== */
+    section{
+      padding: clamp(44px, 7vw, 80px) 0;
+      border-top:1px solid rgba(228,224,214,.8);
+    }
+    .section-title{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:12px;
+      margin-bottom:24px;
+    }
+    .section-title h2{
+      margin:0;
+      font-size: clamp(1.5rem, 3.2vw, 2.1rem);
+      letter-spacing:-.02em;
+      color:#1f1c17;
+    }
+    .section-title p{
+      margin:0;
+      color:var(--muted);
+      font-size:.92rem;
+    }
+
+    /* ====== À propos ====== */
+    .about{
+      grid-template-columns: minmax(0, 240px) minmax(0, 1fr);
+      align-items:start;
+    }
+    .avatar{
+      width: 220px;
+      aspect-ratio:1;
+      border-radius: 28px;
+      background: radial-gradient(circle at 0 0,#efe6d4 0,transparent 55%), #e5ddcf;
+      border:1px solid rgba(212,205,189,.9);
+      box-shadow:var(--shadow-soft);
+      overflow:hidden;
+    }
+    .avatar img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+    .about .facts{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      margin:12px 0 8px;
+    }
+
+    @media (max-width:880px){
+      .about{ grid-template-columns: 1fr; }
+      .avatar{ width:180px; margin-bottom:10px; }
+    }
+
+    /* ====== Projets / Cartes ====== */
+    .filters{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      justify-content:flex-end;
+    }
+    .filters .btn{
+      font-size:.8rem;
+      padding:.45rem .75rem;
+    }
+
+    .projects{
+      display:flex;
+      flex-wrap:wrap;
+      gap:22px;
+    }
+
+    .card{
+      position:relative;
+      background:var(--panel);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      overflow:hidden;
+      display:flex;
+      flex-direction:column;
+      box-shadow:var(--shadow-soft);
+      transition:
+        transform .22s ease,
+        box-shadow .22s ease,
+        border-color .22s ease,
+        background-color .22s ease;
+      flex:1 1 280px;
+      max-width:320px;
+    }
+    .card:hover{
+      transform: translateY(-4px) translateZ(0);
+      box-shadow:0 22px 55px rgba(59,48,33,.22);
+      border-color: color-mix(in srgb, var(--accent) 38%, var(--line));
+      background:linear-gradient(180deg,#ffffff, #f6f1e6);
+    }
+
+    .status-badge{
+      position:absolute;
+      top:10px;
+      left:10px;
+      padding:3px 9px;
+      border-radius:999px;
+      font-size:.7rem;
+      text-transform:uppercase;
+      letter-spacing:.14em;
+      font-weight:600;
+      backdrop-filter: blur(16px);
+      color:rgba(255,255,255,.98);
+      z-index:3;
+      pointer-events:none;
+      box-shadow:0 8px 18px rgba(0,0,0,.45);
+      border:1px solid rgba(255,255,255,.65);
+    }
+    .status--done{
+      background:linear-gradient(135deg,#409655,#91b37a);
+    }
+    .status--wip{
+      background:linear-gradient(135deg,#b63a2e,#d67b3e);
+    }
+
+    .thumb{
+      position:relative;
+      width:100%;
+      height:220px;
+      background:#e5ddcf;
+      overflow:hidden;
+    }
+    .thumb img{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      object-position:center;
+      transform:scale(1.03);
+      transition: transform .35s ease, filter .35s ease;
+    }
+    .card:hover .thumb img{
+      transform:scale(1.07);
+      filter:saturate(1.12);
+    }
+
+    .card-body{
+      padding:14px 16px 16px;
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+    }
+
+    .card h3{
+      margin:0;
+      font-size:1.02rem;
+      letter-spacing:.02em;
+      font-family: inherit;
+      font-weight:600;
+    }
+
+    .meta{
+      display:flex;
+      flex-wrap:wrap;
+      gap:6px;
+      align-items:center;
+      color:var(--muted);
+      font-size:.78rem;
+    }
+
+    .card .sub{
+      font-size:.88rem;
+      color:var(--muted);
+    }
+
+    .card-footer{
+      margin-top:6px;
+      display:flex;
+      justify-content:flex-end;
+    }
+
+    .card-link{
+      font-size:.84rem;
+      display:inline-flex;
+      align-items:center;
+      gap:.25rem;
+      color:var(--accent-strong);
+    }
+    .card-link span{
+      font-size:1.15em;
+      transform:translateY(1px);
+    }
+    .card-link:hover{
+      text-decoration:underline;
+    }
+
+    @media (max-width:880px){
+      .card{
+        flex:1 1 100%;
+        max-width:100%;
+      }
+    }
+
+    /* ====== Modales / Case studies ====== */
+    dialog{
+      width:min(1240px, 98vw);
+      border:none;
+      padding:0;
+      border-radius:22px;
+      background:#f7f2e8;
+      color:var(--text);
+      box-shadow:0 35px 90px rgba(45,37,27,.8);
+    }
+    dialog::backdrop{
+      background:
+        radial-gradient(circle at 20% 0%, rgba(206, 181, 130,.6), transparent 60%),
+        radial-gradient(circle at 80% 100%, rgba(180, 201, 148,.6), transparent 60%),
+        rgba(24,20,14,.85);
+      backdrop-filter: blur(16px);
+    }
+    .modal-head{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:18px 22px;
+      border-bottom:1px solid rgba(228,224,214,.9);
+      background:rgba(248,244,236,0.98);
+    }
+    .modal-head strong{
+      font-weight:600;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      font-size:.85rem;
+      color:#2b2720;
+    }
+    .modal-body{
+      padding:22px;
+    }
+
+    .case-layout{
+      display:grid;
+      grid-template-columns: minmax(0, 1.7fr) minmax(0, 1.1fr);
+      gap:20px;
+      align-items:flex-start;
+    }
+    @media (max-width:768px){
+      .case-layout{
+        grid-template-columns:1fr;
+      }
+    }
+
+    .case-gallery{
+      position:relative;
+      height:520px;
+      overflow:hidden;
+      border-radius:16px;
+      background:#e1d8c7;
+      border:1px solid rgba(228,224,214,.9);
+      padding:0;
+      box-sizing:border-box;
+    }
+    @media (max-width:768px){
+      .case-gallery{ height:380px; }
+    }
+
+    .case-gallery-track{
+      position:absolute;
+      inset:0;
+      display:flex;
+      flex-direction:column;
+      will-change: transform;
+    }
+
+    .case-gallery figure{
+      margin:0;
+      flex:0 0 100%;
+      padding:8px 8px 10px;
+      box-sizing:border-box;
+      display:flex;
+      flex-direction:column;
+      background:#f8f4ec;
+    }
+
+    .case-gallery img{
+      width:100%;
+      flex:1 1 auto;
+      min-height:0;
+      object-fit:cover;
+      object-position:center;
+      border-radius:12px;
+      border:1px solid rgba(218,210,194,.95);
+      background:#e1d8c7;
+    }
+
+    .case-gallery figcaption{
+      margin-top:6px;
+      font-size:.8rem;
+      color:var(--muted);
+    }
+
+    .case-gallery-indicators{
+      position:absolute;
+      top:50%;
+      right:10px;
+      transform:translateY(-50%);
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+      z-index:2;
+    }
+    .case-gallery-dot{
+      width:10px;
+      height:10px;
+      border-radius:999px;
+      border:1px solid rgba(250,248,242,.9);
+      background:rgba(42,33,24,.35);
+      padding:0;
+      cursor:pointer;
+    }
+    .case-gallery-dot.active{
+      background:#f9f4ea;
+      border-color:#f9f4ea;
+    }
+
+    .case-text{
+      font-size:.94rem;
+      color:var(--muted);
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+    }
+    .case-text h3{
+      margin:0 0 4px;
+      font-size:1rem;
+      color:#2b2720;
+    }
+    .case-text ul{
+      padding-left:1.1rem;
+      margin:.1rem 0 .6rem;
+    }
+
+    .close{
+      background:rgba(255,255,255,.95);
+      border:1px solid rgba(228,224,214,.9);
+      border-radius:999px;
+      padding:.45rem .8rem;
+      color:var(--muted);
+      cursor:pointer;
+      font-size:.8rem;
+      text-transform:uppercase;
+      letter-spacing:.12em;
+    }
+    .close:hover{
+      background:#e9e0cf;
+      color:#2b2720;
+    }
+
+    /* ====== CV ====== */
+    .cv-card{
+      background:rgba(249,245,237,0.96);
+      border:1px solid rgba(228,224,214,.9);
+      border-radius:22px;
+      box-shadow:var(--shadow-soft);
+      padding:26px 22px 22px;
+    }
+    .cv-inner{
+      max-width:900px;
+      margin:0 auto;
+    }
+    .cv-header-text{
+      margin-bottom:18px;
+    }
+    .cv-cols{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:24px;
+    }
+    .cv-cols h3{
+      font-size:1.02rem;
+      margin-top:0;
+    }
+    .cv-cols ul{
+      padding-left:1.1rem;
+      margin:.35rem 0 0;
+      font-size:.92rem;
+      color:var(--muted);
+    }
+    .cv-cols li+li{ margin-top:.35rem; }
+    @media (max-width:768px){
+      .cv-cols{
+        grid-template-columns:1fr;
+      }
+    }
+
+    /* ====== Footer ====== */
+    footer{
+      padding:40px 0 32px;
+      border-top:1px solid rgba(228,224,214,.8);
+      color:var(--muted);
+      font-size:.85rem;
+    }
+
+    /* ====== Animations d'apparition ====== */
+    .reveal{
+      opacity:0;
+      transform: translateY(14px);
+      transition: opacity .5s ease, transform .5s ease;
+      will-change: opacity, transform;
+    }
+    .reveal.in{ opacity:1; transform:none; }
+    @media (prefers-reduced-motion: reduce){
+      *{ transition:none !important; animation:none !important; }
+      .reveal{ opacity:1; transform:none; }
+    }
+
+    /* ====== Overlay plein écran pour les images ====== */
+    .lightbox-overlay{
+      position:fixed;
+      inset:0;
+      background:rgba(10,8,6,.92);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      z-index:9999;
+    }
+    .lightbox-inner{
+      position:relative;
+      display:flex;
+      align-items:center;
+      gap:16px;
+    }
+    .lightbox-image{
+      max-width:90vw;
+      max-height:90vh;
+      border-radius:18px;
+      box-shadow:0 40px 110px rgba(0,0,0,.9);
+      cursor:zoom-out;
+      border:1px solid rgba(250,248,242,.3);
+      background:#15110b;
+    }
+    .lightbox-arrow{
+      border:none;
+      background:transparent;
+      font-size:2.5rem;
+      line-height:1;
+      padding:0 8px;
+      cursor:pointer;
+      color:#f5f1e7;
+      user-select:none;
+    }
+    .lightbox-arrow:focus-visible{
+      outline:2px solid #f5f1e7;
+      outline-offset:4px;
+    }
+  </style>
+</head>
+<body>
+  <!-- ====== Header ====== -->
+  <header>
+    <div class="container nav">
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <h1>Axel CALIX — Design </h1>
+      </div>
+      <nav aria-label="Navigation principale">
+        <a href="#projets">Projets</a>
+        <a href="#apropos">À propos</a>
+        <a href="#competences">Compétences</a>
+        <a href="#cv">CV</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <div class="right"></div>
+    </div>
+  </header>
+
+  <!-- ====== Hero ====== -->
+  <section class="hero container">
+    <h2 class="headline">Designer <span>produit et objet</span>.</h2>
+    <p class="sub">
+     Je travaille à l’intersection de la fabrication manuelle et numérique, en développant des objets, des dispositifs et des architectures liés a la nature, au corps et au milieu.</p> 
+     <p class="sub"> Ici, une sélection de projets parcourant l’ensemble du processus de  recherche menant à la réalisation.
+    </p>
+  </section>
+
+  <!-- ====== Projets ====== -->
+  <section id="projets" class="container">
+    <div class="section-title">
+      <h2>Projets sélectionnés</h2>
+      <div class="filters" role="tablist" aria-label="Filtres projets">
+        <button class="btn btn--ghost" data-filter="all" role="tab" aria-selected="true">Tous</button>
+        <button class="btn btn--ghost" data-filter="objet" role="tab">Objet</button>
+        <button class="btn btn--ghost" data-filter="architecture" role="tab">Architecture</button>
+        <button class="btn btn--ghost" data-filter="ux" role="tab">UX / Codage</button>
+      </div>
+    </div>
+
+    <div class="projects">
+      <!-- OBJET : Héli Lampe (Fini) -->
+      <article class="card reveal" data-tags="objet">
+        <span class="status-badge status--done">Fini</span>
+        <a href="#" class="open" data-modal="m1" aria-label="Ouvrir le projet Héli Lampe">
+          <div class="thumb">
+            <img src="assets/heli/heli3.png" alt="Rendu de la Héli Lampe, lampe en bois et plastique" />
+          </div>
+        </a>
+        <div class="card-body">
+          <h3>Héli Lampe</h3>
+          <div class="meta">
+            <span class="tag">Veilleuse</span>
+            <span class="tag">Fabrication hybride</span>
+          </div>
+          <p class="sub">
+            Veilleuse pour enfants fonctionnant avec un simple mouvement de vissage et dévissage :
+            la lumière monte, se diffuse puis s’atténue sans électronique complexe, entre bois tourné
+            et pièces internes imprimées en 3D.
+          </p>
+          <div class="card-footer">
+            <a href="#" class="card-link" data-open="m1">
+              Voir le projet <span>→</span>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- OBJET : LumaBoo (Fini) -->
+      <article class="card reveal" data-tags="objet">
+        <span class="status-badge status--done">Fini</span>
+        <a href="#" class="open" data-modal="m8" aria-label="Ouvrir le projet LumaBoo">
+          <div class="thumb">
+            <img src="assets/lampe camping/a.png" alt="Lampe camping LumaBoo" />
+          </div>
+        </a>
+        <div class="card-body">
+          <h3>LumaBoo</h3>
+          <div class="meta">
+            <span class="tag">Éclairage nomade</span>
+            <span class="tag">Camp / Rando</span>
+          </div>
+          <p class="sub">
+            Lampe portable qui accompagne du salon au bivouac. Une base en bambou tourné
+            et un diffuseur spiralé imprimé en 3D produisent une lumière chaude en fonction de sa position,
+            pensée autant pour le confort que pour la robustesse.
+          </p>
+          <div class="card-footer">
+            <a href="#" class="card-link" data-open="m8">
+              Voir le projet <span>→</span>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- OBJET : SR-89 (Fini) -->
+      <article class="card reveal" data-tags="objet">
+        <span class="status-badge status--done">Fini</span>
+        <a href="#" class="open" data-modal="m4" aria-label="Ouvrir le projet SR-89 Evo X">
+          <div class="thumb">
+            <img src="assets/sr-89/IMG_9348.jpeg" alt="SR-89 Evo X vue d'ensemble" />
+          </div>
+        </a>
+        <div class="card-body">
+          <h3>SR-89 Evo X</h3>
+          <div class="meta">
+            <span class="tag">Réhabilitation historique</span>
+            <span class="tag">Tir sportif</span>
+          </div>
+          <p class="sub">
+            Châssis contemporain développé pour un fusil Schmidt-Rubin de 1889.
+            Le projet mêle restauration, ergonomie et optimisation pour le tir longue distance,
+            dans le respect du cadre réglementaire.
+          </p>
+          <div class="card-footer">
+            <a href="#" class="card-link" data-open="m4">
+              Voir le projet <span>→</span>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- OBJET : BALYSE (Fini) -->
+      <article class="card reveal" data-tags="objet">
+        <span class="status-badge status--done">Fini</span>
+        <a href="#" class="open" data-modal="m5" aria-label="Ouvrir le projet BALYSE">
+          <div class="thumb">
+            <img src="assets/BALYSE/a.png" alt="BALYSE calculateur balistique" />
+          </div>
+        </a>
+        <div class="card-body">
+          <h3>BALYSE</h3>
+          <div class="meta">
+            <span class="tag">Calculateur balistique</span>
+            <span class="tag">Interface d’aide au tir</span>
+          </div>
+          <p class="sub">
+            Outil de calcule Balistique qui rassemble données météo, trajectoires et corrections de la lunette à appliquer.
+            L’objectif est de rendre la lecture balistique plus intuitive pour le tireur.
+          </p>
+          <div class="card-footer">
+            <a href="#" class="card-link" data-open="m5">
+              Voir le projet <span>→</span>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- OBJET : ExoStab (En cours) -->
+      <article class="card reveal" data-tags="objet">
+        <span class="status-badge status--wip">En cours</span>
+        <a href="#" class="open" data-modal="m10" aria-label="Ouvrir le projet ExoStab">
+          <div class="thumb">
+            <img src="assets/ExoStab/cover.jpg" alt="Système de serrage ExoStab" />
+          </div>
+        </a>
+        <div class="card-body">
+          <h3>ExoStab</h3>
+          <div class="meta">
+            <span class="tag">Exosquelette</span>
+            <span class="tag">Stabilisation</span>
+          </div>
+          <p class="sub">
+            Dispositif de stabilisation qui vient accompagner le haut du corps pour réduire
+            les micro-mouvements. Un travail sur les appuis, les sangles et la liberté de
+            mouvement résiduelle pour le tir sportif.
+          </p>
+          <div class="card-footer">
+            <a href="#" class="card-link" data-open="m10">
+              Voir le projet <span>→</span>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- OBJET : Munition Biodegradable 7.62x51 (En cours) -->
+      <article class="card reveal" data-tags="objet">
+        <span class="status-badge status--wip">En cours</span>
+        <a href="#" class="open" data-modal="m11" aria-label="Ouvrir le projet Munition Biodegradable 7.62x51">
+          <div class="thumb">
+            <img src="assets/munititon/1.jpg" alt="munition biodegradable 7.62x51" />
+          </div>
+        </a>
+        <div class="card-body">
+          <h3>Munition Biodegradable 7.62x51</h3>
+          <div class="meta">
+            <span class="tag">Balistique</span>
+            <span class="tag">Biodegradable</span>
+          </div>
+          <p class="sub">
+            Recherche et développement d’une munition biodégradable pour le tir sportif
+            longue distance. L’enjeu est de concevoir une cartouche complète avec des matériaux biosoursés.
+            Une Essai a été réalisé dans un stand de tir avec un calibre 22LR.
+          </p>
+          <div class="card-footer">
+            <a href="#" class="card-link" data-open="m11">
+              Voir le projet <span>→</span>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- OBJET : MIRA (En cours, ex-Linea Lamp) -->
+      <article class="card reveal" data-tags="objet">
+        <span class="status-badge status--wip">En cours</span>
+        <a href="#" class="open" data-modal="m12" aria-label="Ouvrir le projet MIRA">
+          <div class="thumb">
+            <img src="assets/linea-lamp/cover.jpg" alt="Drone MIRA nouvelle génération" />
+          </div>
+        </a>
+        <div class="card-body">
+          <h3>MIRA</h3>
+          <div class="meta">
+            <span class="tag">Drone autonome</span>
+            <span class="tag">IA générative</span>
+          </div>
+          <p class="sub">
+            Drone d’exploration doter d'une IA pensé comme un partenaire d’orientation en nature c'est un
+            outil d’observation et d'optimisation d'itinéraires. Sa structure est conçue en CAO et assistée par IA pour optimisée la
+            légèreté, robustesse et efficacité aérodynamique.
+          </p>
+          <div class="card-footer">
+            <a href="#" class="card-link" data-open="m12">
+              Voir le projet <span>→</span>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- ARCHI : Oxygène (Fini) -->
+      <article class="card reveal" data-tags="architecture">
+        <span class="status-badge status--done">Fini</span>
+        <a href="#" class="open" data-modal="m2" aria-label="Ouvrir le projet Oxygène">
+          <div class="thumb">
+            <img src="assets/oxygene/IMG_9280.jpeg" alt="Structure Oxygène en vue d'ensemble" />
+          </div>
+        </a>
+        <div class="card-body">
+          <h3>Oxygène</h3>
+          <div class="meta">
+            <span class="tag">Installation</span>
+            <span class="tag">Micro-Folie / FRAC</span>
+            <span class="tag">Expo</span>
+          </div>
+          <p class="sub">
+            Architecture immersif qui rend visible la qualité de l’air à travers une structure gonflable,
+            un espace  dépolluantes par des plantes et des capteurs. Le volume respire en fonction des données atmosphériques relevées.               Exposé à la Micro-Folie de Vierzon.
+          </p>
+          <div class="card-footer">
+            <a href="#" class="card-link" data-open="m2">
+              Voir le projet <span>→</span>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- ARCHI : Au fil de l'eau (Fini) -->
+      <article class="card reveal" data-tags="architecture">
+        <span class="status-badge status--done">Fini</span>
+        <a href="#" class="open" data-modal="m9" aria-label="Ouvrir le projet Au fil de l'eau">
+          <div class="thumb">
+            <img src="assets/au fil de l'eau/peniche A.png" alt="Pavillon Au fil de l'eau" />
+          </div>
+        </a>
+        <div class="card-body">
+          <h3>Au fil de l'eau</h3>
+          <div class="meta">
+            <span class="tag">DNA Design d’objet</span>
+            <span class="tag">Itinérance fluviale</span>
+          </div>
+          <p class="sub">
+            Transformation d’une péniche en lieu hybride micro-exposition, espace de travail
+            partagé et interface de rencontre entre étudiants, habitants et entreprises le long
+            des espaces fluviaux français.
+          </p>
+          <div class="card-footer">
+            <a href="#" class="card-link" data-open="m9">
+              Voir le projet <span>→</span>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- UX : OSMO (En cours) -->
+      <article class="card reveal" data-tags="ux">
+        <span class="status-badge status--wip">En cours</span>
+        <a href="#" class="open" data-modal="m3" aria-label="Ouvrir le projet OSMO">
+          <div class="thumb">
+            <img src="assets/osmo/osmo logo.ico" alt="Application OSMO" />
+          </div>
+        </a>
+        <div class="card-body">
+          <h3>OSMO</h3>
+          <div class="meta">
+            <span class="tag">Assistance 3D</span>
+            <span class="tag">Diplôme DNSEP</span>
+          </div>
+          <p class="sub">
+            Application de modelisation 3D et de fabrication numérique permettant de penser un objet
+            en langage ecrit naturel, pour tout public de tout ages et sans compétences techniques.
+          </p>
+          <div class="card-footer">
+            <a href="#" class="card-link" data-open="m3">
+              Voir le projet <span>→</span>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <!-- UX : Dash Atelier (En cours) — MASQUÉ POUR PLUS TARD -->
+      <!--
+      <article class="card reveal" data-tags="ux">
+        <span class="status-badge status--wip">En cours</span>
+        <a href="#" class="open" data-modal="m6" aria-label="Ouvrir le projet Dash Atelier">
+          <div class="thumb">
+            <img src="assets/ux-dash.jpg" alt="Interface dashboard atelier" />
+          </div>
+        </a>
+        <div class="card-body">
+          <h3>Dash Atelier</h3>
+          <div class="meta">
+            <span class="tag">UX / Codage</span>
+            <span class="tag">Web</span>
+          </div>
+          <p class="sub">
+            Dashboard pour visualiser l’état des postes, des consommables
+            et des maintenances dans un atelier.
+          </p>
+          <div class="card-footer">
+            <a href="#" class="card-link" data-open="m6">
+              Voir le projet <span>→</span>
+            </a>
+          </div>
+        </div>
+      </article>
+      -->
+    </div>
+  </section>
+
+  <!-- ====== À propos ====== -->
+  <section id="apropos" class="container">
+    <div class="section-title">
+      <h2>À propos</h2>
+    </div>
+    <div class="grid about reveal">
+      <div class="avatar">
+        <img src="assets/portrait.jpg" alt="Portrait d'Axel Calix" loading="lazy" />
+      </div>
+      <div>
+        <p>
+         Designer de 22 ans, je développe une pratique située entre objet, architecture et anthropotechnie, travaillant sur des dispositifs techniques liés à la nature et à l’Anthropocène. Je m’intéresse particulièrement aux forces physiques gravité, pression, mouvement et à la manière dont elles peuvent être rendues visibles par la forme.
+        </p>
+        <p>
+          Je travaille autant avec les outils traditionnels (dessin, maquette, tournage, usinage) qu’avec les outils numériques 
+          (CAO, impression 3D, code). Mon parcours en écoles d’art et de design nourrit une approche expérimentale, documentée et orientée vers l’usage.
+        </p>
+        <div class="about facts">
+          <span class="tag">Rhinoceros 3D</span>
+          <span class="tag">Fusion 360</span>
+          <span class="tag">Adobe</span>
+          <span class="tag">Prototypage</span>
+          <span class="tag">Impression 3D</span>
+        </div>
+        <p class="sub">
+          Actuellement en Master recherche <strong>Object Craft and Computation</strong> à l’ESAD
+          Orléans.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== Compétences ====== -->
+  <section id="competences" class="container">
+    <div class="section-title">
+      <h2>Compétences</h2>
+      <p>Outils &amp; méthodes</p>
+    </div>
+    <div class="grid" style="grid-template-columns: repeat(3, 1fr);">
+      <div class="card reveal" style="padding:18px;">
+        <h3>CAO &amp; Rendu</h3>
+        <p class="sub">
+          Modélisation 3D puis rendu d’objets et d’architectures sur Rhino, Fusion 360 et Blender.          
+        </p>
+      </div>
+      <div class="card reveal" style="padding:18px;">
+        <h3>Fabrication &amp; Prototype</h3>
+        <p class="sub">
+          Impression 3D FDM / résine, découpe laser, usinage 3 axes, tournage et fraisage manuelle,
+          assemblage et mise au point de prototypes fonctionnels.
+        </p>
+      </div>
+      <div class="card reveal" style="padding:18px;">
+        <h3>Design process</h3>
+        <p class="sub">
+          Recherche, cadrage, scénarios d’usage, tests utilisateurs, documentation
+          de projet et mise en forme.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== CV ====== -->
+  <section id="cv" class="container">
+    <div class="section-title">
+      <h2>CV</h2>
+      <p>Parcours, expériences &amp; formations</p>
+    </div>
+
+    <div class="cv-card reveal">
+      <div class="cv-inner">
+        <div class="cv-header-text">
+          <p class="sub">
+          
+          </p>
+          <p class="sub">
+          </p>
+        </div>
+
+        <div class="cv-cols">
+          <!-- Expériences -->
+          <div>
+            <h3>Expériences</h3>
+            <ul>
+              <li>
+                <strong>2024 — Stage</strong> avec Pépite Centre-Val de Loire au LAB’O d’Orléans.
+              </li>
+              <li>
+                <strong>2023–2024 — Étudiant entrepreneur Pépite</strong>, projet d’entrepreneuriat
+                <em>« Au fil de l’eau »</em>.
+              </li>
+              <li>
+                <strong>2025 — Exposition</strong> partenariat ESAD / FRAC Centre-Val de Loire avec le projet
+                <em>« Oxygène »</em>, exposé à la Micro-Folie de Vierzon de juin à septembre 2025.
+              </li>
+            </ul>
+          </div>
+
+          <!-- Formation -->
+          <div>
+            <h3>Formation</h3>
+            <ul>
+              <li>
+                <strong>2017–2019</strong> — Lycée des Beaux-Arts d’Ayvalik (Turquie).
+              </li>
+              <li>
+                <strong>2019–2021</strong> — Lycée Savary de Mauléon,
+                BAC Général spé Arts.
+              </li>
+              <li>
+                <strong>2022–2023</strong> — Beaux-Arts de Nantes, L1.
+              </li>
+              <li>
+                <strong>2023–2025</strong> — ESAD d’Orléans, Diplôme DNA
+                design d’objet et d’espaces.
+              </li>
+              <li>
+                <strong>2025 – Aujourd’hui</strong> — ESAD Orléans,
+                Master recherche <em>Object Craft and Computation</em>.
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div style="margin-top:18px;">
+          <a class="btn btn--primary" href="assets/cv 2025-2026.pdf" target="_blank" rel="noopener">
+            Télécharger le CV (PDF)
+          </a>
+          <span class="sub" style="display:block; margin-top:6px;">
+          </span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== Contact ====== -->
+  <section id="contact" class="container">
+    <div class="section-title">
+      <h2>Contact</h2>
+      <p>Travaillons ensemble</p>
+    </div>
+
+    <div class="reveal" style="max-width:720px; margin:0 auto;">
+      <p>
+        📨 <a href="mailto:calixaxelteo@gmail.com">calixaxelteo@gmail.com</a><br/>
+      </p>
+      <div style="display:flex; flex-wrap:wrap; gap:.6rem; margin-bottom:8px;">
+        <a class="btn btn--primary" href="mailto:calixaxelteo@gmail.com">Envoyer un e-mail</a>
+        <a class="btn" href="#">LinkedIn</a>
+        <a class="btn" href="#">Behance</a>
+      </div>
+    </div>
+
+    <form class="card reveal" style="padding:18px; max-width:720px; margin:20px auto 0;">
+      <h3 style="margin-top:0">Message rapide</h3>
+      <label>Nom<br>
+        <input required style="width:100%; padding:.8rem; border-radius:12px; border:1px solid var(--line); background:#ffffff; color:var(--text)"/>
+      </label>
+      <label style="display:block; margin-top:10px;">E-mail<br>
+        <input type="email" required style="width:100%; padding:.8rem; border-radius:12px; border:1px solid var(--line); background:#ffffff; color:var(--text)"/>
+      </label>
+      <label style="display:block; margin-top:10px;">Message<br>
+        <textarea rows="5" style="width:100%; padding:.8rem; border-radius:12px; border:1px solid var(--line); background:#ffffff; color:var(--text)"></textarea>
+      </label>
+      <button class="btn btn--primary" style="margin-top:12px;" type="submit">Envoyer</button>
+    </form>
+  </section>
+
+  <footer class="container">
+    <small>© <span id="year"></span> Axel CALIX — Portfolio. Tous droits réservés.</small>
+  </footer>
+
+  <!-- ====== MODALES / CASE STUDIES ====== -->
+
+  <!-- HÉLI LAMPE -->
+  <dialog id="m1" aria-labelledby="m1title">
+    <div class="modal-head">
+      <strong id="m1title">Héli Lampe</strong>
+      <button class="close" data-close>Fermer</button>
+    </div>
+    <div class="modal-body">
+      <div class="case-layout">
+        <div class="case-gallery">
+          <div class="case-gallery-track">
+            <figure><img src="assets/heli/heli3.png" alt="Héli Lampe vue générale"><figcaption>Vue générale de la lampe en situation.</figcaption></figure>
+            <figure><img src="assets/heli/heli2.png" alt="Héli Lampe réglage"><figcaption>Héli en position de vie quotidienne.</figcaption></figure>
+            <figure><img src="assets/heli/heli.jpg" alt="Héli Lampe détail bois"><figcaption>Mode veilleuse de nuit, lumière douce et diffuse.</figcaption></figure>
+            <figure><img src="assets/heli/heli4.png" alt="Héli Lampe diffusion"><figcaption>Heli lampe</figcaption></figure>
+            <figure><img src="assets/heli/heli5.png" alt="Héli Lampe ambiance nuit"><figcaption>Notice d'utilisation.</figcaption></figure>
+            <figure><img src="assets/heli/heli6.png" alt="Héli Lampe détail pas de vis"><figcaption>Mécanisme interne imprimé en 3D, pas de vis hélicoïdal.</figcaption></figure>
+            <figure><img src="assets/heli/heli7.jpg" alt="Héli Lampe prototype haut"><figcaption>Prototype, plateau lumineux en position haute.</figcaption></figure>
+            <figure><img src="assets/heli/heli8.jpg" alt="Héli Lampe prototype bas"><figcaption>Prototype, plateau lumineux en position basse.</figcaption></figure>
+            <figure><img src="assets/heli/8b.png" alt="Héli Lampe prototype bas"><figcaption>Plan de coupe</figcaption></figure>
+            <figure><img src="assets/heli/heli9.png" alt="Héli Lampe détail matériau"><figcaption>Etapes du tournage bois en chêne massif.</figcaption></figure>
+            <figure><img src="assets/heli/5.jpg" alt="Héli Lampe vue de dessus"><figcaption>Détail tournage.</figcaption></figure>
+            <figure><img src="assets/heli/9.jpg" alt="Héli Lampe ambiance atelier"><figcaption>Tournage.</figcaption></figure>
+          </div>
+          <div class="case-gallery-indicators"></div>
+        </div>
+        <div class="case-text">
+          <h3>Contexte &amp; intention</h3>
+          <p>
+            Héli Lampe est une veilleuse pour enfants, pensée comme un objet rassurant qui raconte
+            son propre fonctionnement. En tournant la partie supérieure, la lumière monte puis redescend,
+            sans variateur ni électronique sophistiquée.
+          </p>
+          <h3>Démarche</h3>
+          <p>
+            Le fût est tourné en chêne et abrite un système interne imprimé en 3D. Le pas de vis
+            guide la montée du plateau lumineux. L’ensemble joue sur la friction, la résistance et
+            la lecture intuitive du geste.
+          </p>
+          <h3>Points clés</h3>
+          <ul>
+            <li>Geste simple, facilement appropriable par un enfant.</li>
+            <li>Assemblage démontable, pensé pour la maintenance et la réparation.</li>
+            <li>Choix de matériaux chaleureux, durables et peu techniques côté utilisateur.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- OXYGÈNE -->
+  <dialog id="m2" aria-labelledby="m2title">
+    <div class="modal-head">
+      <strong id="m2title">Oxygène</strong>
+      <button class="close" data-close>Fermer</button>
+    </div>
+    <div class="modal-body">
+      <div class="case-layout">
+        <div class="case-gallery">
+          <div class="case-gallery-track">
+            <figure><img src="assets/oxygene/IMG_7392-872x654.jpg" alt="Oxygène vue 10"><figcaption>Maquette à l'exposition de la Micro-Folie de Vierzon.</figcaption></figure>
+            <figure><img src="assets/oxygene/IMG_9280.jpeg" alt="Oxygène vue 1"><figcaption>Vue générale de la structure Oxygène.</figcaption></figure>
+            <figure><img src="assets/oxygene/IMG_9289.jpeg" alt="Oxygène vue 2"><figcaption>Vue depuis le Musée de l'Agriculture.</figcaption></figure>
+            <figure><img src="assets/oxygene/IMG_9294.jpeg" alt="Oxygène vue 3"><figcaption>Détail des volumes gonflables en latex.</figcaption></figure>
+            <figure><img src="assets/oxygene/IMG_9269.jpeg" alt="Oxygène vue 4"><figcaption>Mobilier interne.</figcaption></figure>
+            <figure><img src="assets/oxygene/IMG_9268.jpeg" alt="Oxygène vue 5"><figcaption>Espace intérieur.</figcaption></figure>
+            <figure><img src="assets/oxygene/IMG_9287.jpeg" alt="Oxygène vue 6"><figcaption>Coté sud.</figcaption></figure>
+            <figure><img src="assets/oxygene/IMG_9279.jpeg" alt="Oxygène vue 7"><figcaption>Vue aérienne de la stuture pneumatique.</figcaption></figure>
+            <figure><img src="assets/oxygene/IMG_9276.jpeg" alt="Oxygène vue 8"><figcaption>Vue extérieure à hauteur de piéton.</figcaption></figure>
+            <figure><img src="assets/oxygene/IMG_9296.jpeg" alt="Oxygène vue 9"><figcaption>Détail des parois gonflables en latex.</figcaption></figure>
+          </div>
+          <div class="case-gallery-indicators"></div>
+        </div>
+        <div class="case-text">
+          <figure>
+            <a href="https://www.frac-centre.fr/actions-territoriales/nouveaux-commissaires/" target="_blank" rel="noopener">
+              Voir le site du FRAC <span>→</span>
+             </a>
+             <img src="assets/oxygene/PROCESSFORMES-1-768x768.jpg"
+                  alt="Étude de formes pour Oxygène"
+                  style="width:100%;height:auto;border-radius:12px;border:1px solid rgba(218,210,194,.95);margin-bottom:4px;object-fit:cover;">
+            <figcaption style="font-size:.8rem;color:var(--muted);">
+              Affiche de l'Exposition de "Oxygène" à la Micro-Folie de Vierzon.
+            </figcaption>
+           </figure>
+
+          <h3>Contexte &amp; question</h3>
+          <p>
+            Conçu en duo avec Théo Facon et en partenariat avec le FRAC d’Orléans, ce projet explore une question centrale : 
+            Comment l’architecture publique peut-elle rendre la qualité de l’air visible et sensible pour encourager des comportements plus responsables ? 
+            Notre installation transforme les données environnementales en une expérience immersive.
+            Au cœur de la structure, des plantes dépolluantes purifient naturellement l’air tandis que des capteurs analysent l’atmosphère extérieure. 
+            En réponse à ces mesures, des parois gonflables en latex transparent se déforment grâce à un système pneumatique, plus l’air est pollué, 
+            plus la membrane se dilate. Le public voit alors la pollution prendre forme et peut pénétrer dans un espace purifié, vivant au rythme de l’environnement. 
+            Installée sur la place du B3 Village by CCI à Vierzon, face au musée et au square des Françaises, l’architecture devient un signal urbain sensible. 
+            Elle interpelle les passants, notamment lors d’événements comme le marché de Noël, et leur offre un lieu où comprendre, 
+            ressentir et respirer un air visuellement rendu perceptible.
+          </p>
+          <h3>Objectifs</h3>
+          <ul>
+            <li>Rendre tangible l’invisible : l’air, sa qualité, ses variations.</li>
+            <li>Créer un espace à la fois refuge, signal urbain et support pédagogique.</li>
+            <li>Articuler esthétique, usage public et données scientifiques en temps quasi réel.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- OSMO -->
+  <dialog id="m3" aria-labelledby="m3title">
+    <div class="modal-head">
+      <strong id="m3title">OSMO</strong>
+      <button class="close" data-close>Fermer</button>
+    </div>
+    <div class="modal-body">
+      <div class="case-layout">
+        <div class="case-gallery">
+          <div class="case-gallery-track">
+            <figure><img src="assets/osmo/1.png" alt="Orga System module 1"><figcaption>Lancement du projet OSMO avec Python.</figcaption></figure>
+            <figure><img src="assets/osmo/2.png" alt="Orga System module 2"><figcaption>Interface utilisateur OSMO.</figcaption></figure>
+            <figure><img src="assets/osmo/3.png" alt="Orga System module 3"><figcaption>Espace de description textuelle de l'objet souhaité.</figcaption></figure>
+            <figure><img src="assets/osmo/4.png" alt="Orga System module 4"><figcaption>Formulation du prompt.</figcaption></figure>
+            <figure><img src="assets/osmo/5.png" alt="Orga System croquis 1"><figcaption>Résultat de la génération 3D.</figcaption></figure>
+            <figure><img src="assets/osmo/6.png" alt="Orga System croquis 2"><figcaption>Etape de transformation en Python.</figcaption></figure>
+          </div>
+          <div class="case-gallery-indicators"></div>
+        </div>
+        <div class="case-text">
+          <h3>Contexte</h3>
+          <p>
+            OSMO est un projet de design et de recherche qui interroge la place du langage écrit
+            naturel dans la conception d’objets. L’ambition est de permettre à n’importe qui et de tout âge ou compétence 
+            de décrire un objet en mots simples, puis d’en générer la modélisation 3D.
+          </p>
+          <p>
+            Le projet s'articule autour de la compréhension et de l'utilisation du langage écrit comme interface de conception.
+            L'objectif est de démocratiser l'accès à la modélisation 3D et à la fabrication numérique en éliminant les barrières techniques.
+            Tout le monde devient ainsi son propre concepteur, et développe une utilisation précise d'objet utile dans un monde actuel de surconsommation.
+          </p>
+          <h3>Enjeux</h3>
+          <ul>
+            <li>Rendre la modélisation 3D accessible sans apprentissage logiciel complexe.</li>
+            <li>Utiliser le langage comme véritable outil de construction de forme.</li>
+            <li>Favoriser des pratiques ouvertes, documentées et reproductibles.</li>
+          </ul>
+          <h3>Points clés</h3>
+          <ul>
+            <li>Génération de modèles 3D à partir de descriptions textuelles.</li>
+            <li>Interface pensée pour des profils variés (enfants, amateurs, étudiants, professionnels).</li>
+            <li>Articulation entre design, pédagogie et technologies de fabrication.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- SR-89 -->
+  <dialog id="m4" aria-labelledby="m4title">
+    <div class="modal-head">
+      <strong id="m4title">SR-89 Evo X</strong>
+      <button class="close" data-close>Fermer</button>
+    </div>
+    <div class="modal-body">
+      <div class="case-layout">
+        <div class="case-gallery">
+          <div class="case-gallery-track">
+            <figure><img src="assets/sr-89/IMG_9348.jpeg" alt="SR-89 Evo X vue 1"><figcaption>Vue générale du châssis.</figcaption></figure>
+            <figure><img src="assets/sr-89/IMG_9335.jpeg" alt="SR-89 Evo X vue 2"><figcaption>Détail des zones de contact et points d’appui.</figcaption></figure>
+            <figure><img src="assets/sr-89/IMG_9338.jpeg" alt="SR-89 Evo X vue 3"><figcaption>.</figcaption></figure>
+            <figure><img src="assets/sr-89/IMG_9340.jpeg" alt="SR-89 Evo X vue 4"><figcaption>Configuration montée en condition de tir.</figcaption></figure>
+            <figure><img src="assets/sr-89/IMG_9343.jpeg" alt="SR-89 croquis 1"><figcaption>Ergonomie de chambrage du levier d'armement.</figcaption></figure>
+            <figure><img src="assets/sr-89/IMG_9344.jpeg" alt="SR-89 croquis 2"><figcaption>Détails de poignée droite type MDT et chargeur grip.</figcaption></figure>
+            <figure><img src="assets/sr-89/SR-89 EVO dem 1.png" alt="SR-89 Evo X vue 5"><figcaption>Assemblage des pièces imprimées en 3D.</figcaption></figure>
+            <figure><img src="assets/sr-89/SR-89 EVO dem 2.png" alt="SR-89 Evo X vue 6"><figcaption>Rendu 3D du châssis.</figcaption></figure>
+          </div>
+          <div class="case-gallery-indicators"></div>
+        </div>
+        <div class="case-text">
+          <figure>
+            <img src="assets/sr-89/393.jpg"
+                 alt="Fusil d'origine avec châssis bois 1889"
+                 style="width:100%;height:auto;border-radius:12px;border:1px solid rgba(218,210,194,.95);margin-bottom:4px;object-fit:cover;">
+            <figcaption style="font-size:.8rem;color:var(--muted);">
+              Fusil d’origine avec châssis bois de 1889.
+            </figcaption>
+          </figure>
+
+          <h3>Contexte</h3>
+          <p>
+            Le projet SR-89 Evo X consiste à adapter un fusil Schmidt-Rubin 1889 à une pratique
+            contemporaine du tir longue distance. Il s’agit de concevoir un châssis moderne,
+            précis et confortable, tout en respectant l’intégrité historique de l’arme et
+            la réglementation en vigueur.
+          </p>
+          <h3>Enjeux</h3>
+          <p>
+            Retrouver de la précision, limiter la fatigue à l’épaule, optimiser les appuis
+            et la stabilité, tout en assumant le caractère patrimonial de la plateforme.
+          </p>
+          <h3>Points clés</h3>
+          <ul>
+            <li>Châssis conçu et ajusté sur mesure via modélisation 3D.</li>
+            <li>Travail sur la relation entre forme, recul et confort d’usage.</li>
+            <li>Approche documentée et encadrée légalement autour d’une arme ancienne.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- BALYSE -->
+  <dialog id="m5" aria-labelledby="m5title">
+    <div class="modal-head">
+      <strong id="m5title">Balyse</strong>
+      <button class="close" data-close>Fermer</button>
+    </div>
+    <div class="modal-body">
+      <div class="case-layout">
+        <div class="case-gallery">
+          <div class="case-gallery-track">
+            <figure><img src="assets/BALYSE/a.png" alt="BALYSE vue 1"><figcaption>Dispositif BALYSE en situation spotter.</figcaption></figure>
+            <figure><img src="assets/BALYSE/1.jpg" alt="BALYSE vue 1"><figcaption>Electronique interne.</figcaption></figure>
+            <figure><img src="assets/BALYSE/3.jpg" alt="BALYSE vue 2"><figcaption>Boitier en impression 3D.</figcaption></figure>
+            <figure><img src="assets/BALYSE/2.jpg" alt="BALYSE rendu 1"><figcaption>Dessous du boitier électroniique visible.</figcaption></figure>
+            <figure><img src="assets/BALYSE/balise interface2.png.png" alt="BALYSE rendu 2"><figcaption>Interface utilisateur et commandes principales.</figcaption></figure>
+            <figure><img src="assets/BALYSE/BALYSE decomp 3.png" alt="BALYSE vue 3"><figcaption>Visualisation 3D intégrant les capteurs.</figcaption></figure>
+            <figure><img src="assets/BALYSE/BALYSE decompo 4.png" alt="BALYSE vue 4"><figcaption>Modelisation 3D du boitier</figcaption></figure>
+          </div>
+          <div class="case-gallery-indicators"></div>
+        </div>
+        <div class="case-text">
+          <h3>Concept</h3>
+          <p>
+            BALYSE rassemble, dans un seul outil, les données indispensables pour le tir
+            à moyenne et longue distance, elle permet de visualiser la trajectoire, la dérive, les conditions météorologiques et ainsi les
+            corrections à appliquer. Il sert de médiateur entre calculs complexes et prise
+            de décision rapide sur le terrain. 
+          </p>
+          <h3>Enjeux</h3>
+          <p>
+            Offrir une lecture claire, hiérarchisée et actionnable des informations ; permettre
+            à la fois au tireur et au spotter de partager une même base de données, tout en
+            conservant un objet robuste, compact et maniable. Son fonctionnement reside en rentrent le click du Zéro à 100m.
+            Un calculateur balistique intégré permet d'ajuster automatiquement les paramètres en fonction des conditions atmosphériques, balistiques et du calibre employé.
+            Le dispositif est conçu pour être utilisé dans des conditions de terrain variées, avec un boitier
+            résistant aux chocs et aux intempéries imprimé en 3D, ainsi que l'electronique interne avec un capteur BMP180 et un microcontrôleur ESP32.
+          </p>
+          <h3>Approche design</h3>
+          <ul>
+            <li>Interface lisible, pensée pour une utilisation en extérieur.</li>
+            <li>Ergonomie compatible avec le port de gants et l’usage sur trépied.</li>
+            <li>Volumétrie compacte, résistante et facile à transporter.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- DASH ATELIER (modale conservée mais carte masquée) -->
+  <dialog id="m6" aria-labelledby="m6title">
+    <div class="modal-head">
+      <strong id="m6title">Dash Atelier</strong>
+      <button class="close" data-close>Fermer</button>
+    </div>
+    <div class="modal-body">
+      <div class="case-layout">
+        <div class="case-gallery">
+          <div class="case-gallery-track">
+            <figure><img src="assets/ux-dash-1.jpg" alt="Dash Atelier écran 1"><figcaption>Vue d’ensemble du tableau de bord.</figcaption></figure>
+            <figure><img src="assets/ux-dash-2.jpg" alt="Dash Atelier écran 2"><figcaption>Écran détaillant l’état des postes.</figcaption></figure>
+            <figure><img src="assets/ux-dash-render-1.jpg" alt="Dash Atelier mockup 1"><figcaption>Intégration de l’interface sur ordinateur.</figcaption></figure>
+            <figure><img src="assets/ux-dash-render-2.jpg" alt="Dash Atelier mockup 2"><figcaption>Scénario de consultation en atelier.</figcaption></figure>
+            <figure><img src="assets/ux-dash-sketch-1.jpg" alt="Dash Atelier croquis 1"><figcaption>Wireframes des premiers écrans.</figcaption></figure>
+            <figure><img src="assets/ux-dash-sketch-2.jpg" alt="Dash Atelier croquis 2"><figcaption>Variantes de hiérarchisation des informations.</figcaption></figure>
+            <figure><img src="assets/ux-dash-1.jpg" alt="Dash Atelier écran 3"><figcaption>Vue des alertes de maintenance.</figcaption></figure>
+            <figure><img src="assets/ux-dash-2.jpg" alt="Dash Atelier écran 4"><figcaption>Affichage des consommables critiques.</figcaption></figure>
+            <figure><img src="assets/ux-dash-render-1.jpg" alt="Dash Atelier mockup 3"><figcaption>Simulation d’usage multi-écrans.</figcaption></figure>
+            <figure><img src="assets/ux-dash-render-2.jpg" alt="Dash Atelier mockup 4"><figcaption>Interface adaptée à différentes résolutions.</figcaption></figure>
+            <figure><img src="assets/ux-dash-1.jpg" alt="Dash Atelier écran 5"><figcaption>Version avec filtres avancés.</figcaption></figure>
+            <figure><img src="assets/ux-dash-2.jpg" alt="Dash Atelier écran 6"><figcaption>Vue de synthèse pour le responsable atelier.</figcaption></figure>
+          </div>
+          <div class="case-gallery-indicators"></div>
+        </div>
+        <div class="case-text">
+          <h3>Problème adressé</h3>
+          <p>
+            Les ateliers de fabrication accumulent de nombreuses informations dispersées :
+            état des postes, maintenance, consommables, réservations. Dash Atelier vise à
+            rassembler ces données dans une interface unique, lisible en un coup d’œil.
+          </p>
+          <h3>Démarche UX</h3>
+          <p>
+            Entretiens, relevé des irritants, cartographie des priorités, puis prototypage
+            rapide d’écrans. Les itérations portent notamment sur la densité d’information
+            et la hiérarchie visuelle.
+          </p>
+          <h3>Résultats</h3>
+          <ul>
+            <li>Visualisation claire de l’état des postes et des machines.</li>
+            <li>Anticipation des ruptures de consommables.</li>
+            <li>Meilleure circulation de l’information entre opérateurs.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- LUMABOO -->
+  <dialog id="m8" aria-labelledby="m8title">
+    <div class="modal-head">
+      <strong id="m8title">LumaBoo</strong>
+      <button class="close" data-close>Fermer</button>
+    </div>
+    <div class="modal-body">
+      <div class="case-layout">
+        <div class="case-gallery">
+          <div class="case-gallery-track">
+            <figure><img src="assets/lampe camping/a.png" alt="LumaBoo vue 1"><figcaption>LumaBoo en situation de camping.</figcaption></figure>
+            <figure><img src="assets/lampe camping/1.jpg" alt="LumaBoo vue 1"><figcaption>Dégradé lumineux.</figcaption></figure>
+            <figure><img src="assets/lampe camping/2.jpg" alt="LumaBoo vue 2"><figcaption></figcaption></figure>
+            <figure><img src="assets/lampe camping/3.jpg" alt="LumaBoo vue 3"><figcaption></figcaption></figure>
+            <figure><img src="assets/lampe camping/4.jpg" alt="LumaBoo vue 4"><figcaption></figcaption></figure>
+            <figure><img src="assets/lampe camping/5.jpg" alt="LumaBoo vue 5"><figcaption></figcaption></figure>
+            <figure><img src="assets/lampe camping/6.jpg" alt="LumaBoo vue 6"><figcaption>Rechargement solaire.</figcaption></figure>
+          </div>
+          <div class="case-gallery-indicators"></div>
+        </div>
+        <div class="case-text">
+          <h3>Concept</h3>
+          <p>
+            Proposer une lampe d’appoint qui passe de l’intérieur à l’extérieur sans changer
+            d'usage, une sorte de lanterne contemporaine, chaleureuse, qui valorise
+            la matière bambou. Son design simple et épuré facilite la prise en main et le transport.
+            Le fonctionnement est intuitif par une rotation du bouchon supérieur, 
+            l'intensité lumineuse varie en fonction de la hauteur du diffuseur translucide imprimé en 3D.
+            Le système d'éclairage utilise des LED à basse consommation alimentées par une batterie rechargeable via USB-C.
+            Il est conçu pour avoir la posibilité d'etre branché sur un panneau solaire externe pour une utilisation en extérieur autonome.
+            La batterie recharge en 6H grace au panneau solaire et permet une utilisation nomade.
+          </p>
+          <h3>Démarche</h3>
+          <p>
+            Travail sur la diffusion de la lumière à travers un motif spiralisé imprimé en 3D et le
+            bambou tourné pour articuler tradition de fabrication manuelle et numérique.
+          </p>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- AU FIL DE L'EAU -->
+  <dialog id="m9" aria-labelledby="m9title">
+    <div class="modal-head">
+      <strong id="m9title">Au fil de l’eau</strong>
+      <button class="close" data-close>Fermer</button>
+    </div>
+    <div class="modal-body">
+      <div class="case-layout">
+        <div class="case-gallery">
+          <div class="case-gallery-track">
+            <figure><img src="assets/au fil de l'eau/peniche A.png" alt="Au fil de l'eau vue 1"><figcaption>Vue générale de la péniche.</figcaption></figure>
+            <figure><img src="assets/au fil de l'eau/600 20251112_15282359.jpg" alt="Au fil de l'eau vue 2"><figcaption>Dimensions et mecanique d'Itinérance.</figcaption></figure>
+            <figure><img src="assets/au fil de l'eau/peniche BB.png" alt="Au fil de l'eau vue 3"><figcaption>Vue du quai.</figcaption></figure>
+            <figure><img src="assets/au fil de l'eau/600 20251112_15301047.jpg" alt="Au fil de l'eau vue 4"><figcaption>Accessibilité par pontons sur le peniche / Norme PMR.</figcaption></figure>
+            <figure><img src="assets/au fil de l'eau/img20251112_15194836.jpg" alt="Au fil de l'eau vue 5"><figcaption>Relation des espaces de travail avec le paysage.</figcaption></figure>
+            <figure><img src="assets/au fil de l'eau/peniche C.png" alt="Au fil de l'eau vue 6"><figcaption>Vue de la structure, des espaces et des points de lumière.</figcaption></figure>
+            <figure><img src="assets/au fil de l'eau/img20251112_15125266.png" alt="Au fil de l'eau vue 7"><figcaption>Apport de lumière naturelle, latéral et zénithal.</figcaption></figure>
+            <figure><img src="assets/au fil de l'eau/peniche D.png" alt="Au fil de l'eau vue 8"><figcaption>Vue de l'espace d'exposition.</figcaption></figure>
+            <figure><img src="assets/au fil de l'eau/img20251112_15225447.jpg" alt="Au fil de l'eau vue 9"><figcaption>Accessibilité à l'espace en cale</figcaption></figure>
+            <figure><img src="assets/au fil de l'eau/600 20251112_15252349.jpg" alt="Au fil de l'eau vue 10"><figcaption>Travail sur les circulations et les espaces d'accrochages.</figcaption></figure>
+            <figure><img src="assets/au fil de l'eau/peniche E.png" alt="Au fil de l'eau vue 11"><figcaption>Vue de la vie sur le quai et des espaces de détente.</figcaption></figure>
+            <figure><img src="assets/au fil de l'eau/600 20251112_15320398.jpg" alt="Au fil de l'eau vue 12"><figcaption>Différantes zones d'utilisation sur le quai.</figcaption></figure>
+          </div>
+          <div class="case-gallery-indicators"></div>
+        </div>
+        <div class="case-text">
+          <h3>Intentions</h3>
+          <p>
+            Au Fil de l’Eau réinvente la péniche Freycinet en un lieu itinérant qui navigue sur la Loire entre Tours, Angers et Nantes
+            pour relier les étudiants, entreprises et habitants des territoires traversés. Sur son pont, six conteneurs transformés
+            en bureaux offrent aux entreprises un cadre de travail ouvert sur la Loire, propice à la créativité et aux échanges. 
+            Leurs parois extérieures deviennent des vitrines vivantes où prototypes et affichages interactifs présententles activités de l'entreprises
+            à chaque escale. Sous le pont, la cale se métamorphose en galerie modulable dédiée aux étudiants exposent leurs projets afin de Favoriser leurs visibilités.
+            Lors des escales, des ateliers et conférences sont organisés. Les étudiants
+            rencontrent des professionnels et donnent vie à une scène créative accessible à tous. En mêlant espace de travail, 
+              exposition et rencontres, la péniche devient une plateforme flottante qui fait dialoguer art, design innovation,et science 
+              tout en diffusant la culture dans les communes isolées qu’elle relie.
+          </p>
+          <h3>Problèmatique</h3>
+          <p>
+           Comment favoriser les rencontres entre étudiants, professionnels et le public, ainsi valoriser la culture à travers les territoires fluviaux ?
+          </p>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- ExoStab -->
+  <dialog id="m10" aria-labelledby="m10title">
+    <div class="modal-head">
+      <strong id="m10title">ExoStab</strong>
+      <button class="close" data-close>Fermer</button>
+    </div>
+    <div class="modal-body">
+      <div class="case-layout">
+        <div class="case-gallery">
+          <div class="case-gallery-track">
+            <figure><img src="assets/ExoStab/b.jpg" alt="ExoStab vue 1"><figcaption>Système ExoStab monté sur utilisateur.</figcaption></figure>
+            <figure><img src="assets/ExoStab/a.jpg" alt="ExoStab vue 2"><figcaption>Essai au Stand de tir.</figcaption></figure>
+            <figure><img src="assets/ExoStab/1.jpg" alt="ExoStab vue 3"><figcaption>Vue d'ensemble du dispositif.</figcaption></figure>
+            <figure><img src="assets/ExoStab/2.jpg" alt="ExoStab vue 4"><figcaption>Reglage du poignets.</figcaption></figure>
+            <figure><img src="assets/ExoStab/3.jpg" alt="ExoStab vue 5"><figcaption>Détail des zones d’appui et de serrage.</figcaption></figure>
+            <figure><img src="assets/ExoStab/4.jpg" alt="ExoStab vue 6"><figcaption>Vue de la partie biceps. </figcaption></figure>
+            <figure><img src="assets/ExoStab/5.jpg" alt="ExoStab vue 7"><figcaption>Teste en condiction arme longue.</figcaption></figure>
+            <figure><img src="assets/ExoStab/6.jpg" alt="ExoStab vue 8"><figcaption>utilisation arme de point.</figcaption></figure>
+          </div>
+          <div class="case-gallery-indicators"></div>
+        </div>
+        <div class="case-text">
+          <h3>Concept</h3>
+          <p>
+            Cet exosquelette entièrement mécanique est conçu pour stabiliser le haut du corps du tireur sportif 
+            en réduisant la fatigue musculaire sans jamais bloquer le mouvement naturel. 
+            Installé le long du bras, commencant de l'epaule et jusqu’aux poignets, 
+            il offre un soutien ciblé grâce à un système de tension par ressort qui accompagne le geste plutôt qu’il ne le contraint.
+            Par cette mechanique, la contrante du ressort est divisée par la charnière au coude qui sert de poulie.
+          </p>
+            Sa structure combine des pièces imprimées en 3D pour garantir légèreté, précision et adaptabilité à des éléments en aluminium 
+            apportant robustesse et fiabilité. Conçu pour s’ajuster à toutes les morphologies, 
+            il s’adapte également aux différentes positions de tir (debout, assis, allongé) afin d’améliorer la stabilité,
+            la régularité et la précision du tireur sur de longues périodes d’entraînement.
+          </p>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- Munition Biodegradable 7.62x51 -->
+  <dialog id="m11" aria-labelledby="m11title">
+    <div class="modal-head">
+      <strong id="m11title">Munition Biodegradable 7.62x51</strong>
+      <button class="close" data-close>Fermer</button>
+    </div>
+    <div class="modal-body">
+      <div class="case-layout">
+        <div class="case-gallery">
+          <div class="case-gallery-track">
+            <figure><img src="assets/munititon/1.jpg" alt="Munition Biodegradable 7.62x51 vue 1"><figcaption>Munition Biodegradable 7.62x51 en vue d’ensemble.</figcaption></figure>
+            <figure><img src="assets/munititon/2.jpg" alt="Munition Biodegradable 7.62x51 vue 2"><figcaption>Comparaison d'ogive.</figcaption></figure>
+            <figure><img src="assets/munititon/3.jpg" alt="Munition Biodegradable 7.62x51 vue 3"><figcaption>Teste d'un moule en impression 3D.</figcaption></figure>
+            <figure><img src="assets/munititon/4.jpg" alt="Munition Biodegradable 7.62x51 vue 4"><figcaption>Usinage du moule en aluminium pour calibre 308W.</figcaption></figure>
+            <figure><img src="assets/munititon/5.jpg" alt="Munition Biodegradable 7.62x51 vue 5"><figcaption>Interieur d'une ogive de bioplastique avec grain ajouter.</figcaption></figure>
+            <figure><img src="assets/munititon/6.jpg" alt="Munition Biodegradable 7.62x51 vue 8"><figcaption>Essai sur cible.</figcaption></figure>
+          </div>
+          <div class="case-gallery-indicators"></div>
+        </div>
+        <div class="case-text">
+          <h3>Intentions</h3>
+          <p>
+            Une munition 7.62x51 entièrement biodégradable, conçue pour minimiser l’impact environnemental
+            des activités de tir sportif et de chasse. En remplaçant les matériaux traditionnels par une ogive en bioplastique injectée dans un moule usiné. Son
+            enveloppe se décompose naturellement après usage, réduisant ainsi la pollution des sols ainsi que de l'utilisation de métaux lourds de plus en plus rare et réglementée.
+            Cette initiative vise à promouvoir des pratiques de tir plus durables, tout en maintenant les performances balistiques attendues. Elle est également conçue pour acroitre la durée de vie des armes en limitant l'accumulation de résidus métalliques dans le canon. 
+            La munition, rentre dans une démarche éco-responsable, et s'inscrit dans un design spéculatif visant à imaginer des solutions innovantes pour un futur plus vert.
+          </p>
+          <p>
+            Une Essai a été réalisé dans un stand de tir avec un calibre 22LR. Le test à été effectué avec succès, la prochaine étape est de réaliser des tests avec un calibre 7.62x51.
+            </p>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- MIRA (ex-Linea Lamp) -->
+  <dialog id="m12" aria-labelledby="m12title">
+    <div class="modal-head">
+      <strong id="m12title">MIRA</strong>
+      <button class="close" data-close>Fermer</button>
+    </div>
+    <div class="modal-body">
+      <div class="case-layout">
+        <div class="case-gallery">
+          <div class="case-gallery-track">
+            <figure>
+              <img src="assets/linea-lamp/01.jpg" alt="MIRA vue d'ensemble en vol">
+              <figcaption>
+                Vue d’ensemble de MIRA en vol, silhouette optimisée par génération assistée.
+              </figcaption>
+            </figure>
+            <figure>
+              <img src="assets/linea-lamp/02.jpg" alt="MIRA détail carcasse générative">
+              <figcaption>
+                Détail de la carcasse générée par IA, travaillée pour l’équilibre entre masse et rigidité.
+              </figcaption>
+            </figure>
+            <figure>
+              <img src="assets/linea-lamp/03.jpg" alt="MIRA capteur et caméra embarqués">
+              <figcaption>
+                Capteur et caméra embarqués dédiés à l’analyse du terrain en temps réel.
+              </figcaption>
+            </figure>
+            <figure>
+              <img src="assets/linea-lamp/04.jpg" alt="MIRA vue en situation outdoor">
+              <figcaption>
+                Mise en situation en randonnée : le drone accompagne la navigation et l’orientation.
+              </figcaption>
+            </figure>
+            <figure>
+              <img src="assets/linea-lamp/sketch-1.jpg" alt="MIRA croquis de recherche de forme">
+              <figcaption>
+                Croquis de recherche formelle autour des structures génératives et de la portance.
+              </figcaption>
+            </figure>
+            <figure>
+              <img src="assets/linea-lamp/sketch-2.jpg" alt="MIRA scénarios d'usage et cartographie">
+              <figcaption>
+                Esquisses de scénarios d’usage : cartographie dynamique et assistance de parcours.
+              </figcaption>
+            </figure>
+          </div>
+          <div class="case-gallery-indicators"></div>
+        </div>
+        <div class="case-text">
+          <h3>Contexte &amp; intention</h3>
+          <p>
+            MIRA explore le développement d’un drone nouvelle génération intégrant l’intelligence
+            artificielle à plusieurs niveaux de sa conception et de son fonctionnement. L’idée
+            est de passer d’un drone “caméra volante” à un véritable compagnon d’analyse et
+            de navigation, capable de lire le terrain et de proposer des choix de parcours.
+          </p>
+
+          <h3>Conception générative de la structure</h3>
+          <p>
+            La carcasse du drone est modélisée à l’aide de génération assistée par IA :
+            la géométrie est optimisée pour atteindre un compromis précis entre légèreté,
+            résistance mécanique et efficacité aérodynamique. Cette approche générative
+            permet d’obtenir des formes cohérentes avec les contraintes de vol, mais
+            difficiles à imaginer avec des méthodes classiques.
+          </p>
+
+          <h3>IA embarquée &amp; lecture du terrain</h3>
+          <p>
+            MIRA embarque un système d’analyse autonome combinant capteur et caméra haute
+            résolution. L’intelligence artificielle traite en temps réel les données
+            visuelles : reconnaissance du terrain, détection d’obstacles et construction
+            d’une cartographie dynamique des zones survolées.
+          </p>
+          <p>
+            L’utilisateur peut ainsi visualiser les reliefs, chemins et zones d’intérêt,
+            même dans des environnements peu documentés ou mal référencés.
+          </p>
+
+          <h3>Assistance à l’orientation</h3>
+          <p>
+            En contexte de randonnée par exemple, l’utilisateur indique un point à atteindre.
+            Le drone calcule alors un trajet optimisé — le plus court, le plus sûr ou le
+            plus accessible — en tenant compte de la topographie, des obstacles et des
+            conditions locales. MIRA devient un guide aérien qui accompagne l’exploration
+            et améliore la sécurité comme la lisibilité du paysage.
+          </p>
+
+          <h3>Ouvertures</h3>
+          <p>
+            Au-delà de l’outdoor, ce type de dispositif ouvre des perspectives en recherche,
+            arpentage, surveillance environnementale ou préparation de parcours. En combinant
+            conception générative et IA embarquée orientée terrain, le projet positionne
+            le drone comme un partenaire d’interprétation, et non plus comme un simple
+            capteur d’images.
+          </p>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- ========== SCRIPT ========== -->
+  <script>
+    // Année dynamique
+    (function(){
+      const yearEl = document.getElementById('year');
+      if(yearEl) yearEl.textContent = new Date().getFullYear();
+    })();
+
+    // Lazy-loading pour toutes les images
+    document.querySelectorAll('img').forEach(img=>{
+      if(!img.hasAttribute('loading')) img.setAttribute('loading','lazy');
+    });
+
+    // Scroll reveal
+    (function(){
+      const io = new IntersectionObserver((entries)=>{
+        entries.forEach(e=>{
+          if(e.isIntersecting){ e.target.classList.add('in'); }
+          else { e.target.classList.remove('in'); }
+        });
+      }, { threshold:.2 });
+      document.querySelectorAll('.reveal').forEach(el=> io.observe(el));
+    })();
+
+    // Filtres projets
+    (function(){
+      const filterButtons = document.querySelectorAll('[data-filter]');
+      if(!filterButtons.length) return;
+
+      filterButtons.forEach(btn=> btn.addEventListener('click', ()=>{
+        filterButtons.forEach(b=> b.setAttribute('aria-selected','false'));
+        btn.setAttribute('aria-selected','true');
+        const val = btn.dataset.filter;
+        document.querySelectorAll('.projects .card').forEach(card=>{
+          const tags = card.dataset.tags || '';
+          card.style.display = (val === 'all' || tags.includes(val)) ? '' : 'none';
+        });
+      }));
+    })();
+
+    // Modales (ouverture / fermeture)
+    (function(){
+      function wireModal(id){
+        const dlg = document.getElementById(id);
+        if(!dlg) return;
+
+        // Boutons "Voir le projet"
+        document.querySelectorAll(`[data-open="${id}"]`).forEach(btn=>{
+          btn.addEventListener('click', (e)=>{
+            e.preventDefault();
+            dlg.showModal();
+            if(window.__resetCarouselForDialog) window.__resetCarouselForDialog(dlg);
+          });
+        });
+
+        // Vignettes cliquables
+        document.querySelectorAll(`.open[data-modal="${id}"]`).forEach(a=>{
+          a.addEventListener('click', (e)=>{
+            e.preventDefault();
+            dlg.showModal();
+            if(window.__resetCarouselForDialog) window.__resetCarouselForDialog(dlg);
+          });
+          a.addEventListener('keydown', (e)=>{
+            if(e.key === 'Enter'){
+              e.preventDefault();
+              dlg.showModal();
+              if(window.__resetCarouselForDialog) window.__resetCarouselForDialog(dlg);
+            }
+          });
+        });
+
+        // Bouton "Fermer"
+        dlg.querySelector('[data-close]')?.addEventListener('click', ()=> dlg.close());
+        // Clic sur le fond
+        dlg.addEventListener('click', (e)=>{ if(e.target === dlg) dlg.close(); });
+      }
+
+      ['m1','m2','m3','m4','m5','m6','m8','m9','m10','m11','m12'].forEach(wireModal);
+    })();
+
+    // Plein écran + carrousel vertical continu, synchronisé avec les points
+    (function(){
+      const galleries = document.querySelectorAll('dialog .case-gallery');
+      const galleryStates = new Map();
+
+      // ---------- Lightbox (zoom plein écran) ----------
+      let overlay = null;
+      let currentGroup = [];
+      let currentIndex = 0;
+
+      function closeOverlay(){
+        if(overlay){
+          overlay.remove();
+          overlay = null;
+          currentGroup = [];
+          currentIndex = 0;
+        }
+      }
+
+      function showImage(idx){
+        if(!overlay || !currentGroup.length) return;
+        if(idx < 0) idx = currentGroup.length - 1;
+        if(idx >= currentGroup.length) idx = 0;
+        currentIndex = idx;
+
+        const img = currentGroup[currentIndex];
+        const big = overlay.querySelector('.lightbox-image');
+        if(!big) return;
+        big.src = img.src;
+        big.alt = img.alt || '';
+      }
+
+      function openOverlayFrom(img, group, root){
+        currentGroup = group;
+        currentIndex = group.indexOf(img);
+
+        overlay = document.createElement('div');
+        overlay.className = 'lightbox-overlay';
+
+        const inner = document.createElement('div');
+        inner.className = 'lightbox-inner';
+
+        const prev = document.createElement('button');
+        prev.className = 'lightbox-arrow';
+        prev.type = 'button';
+        prev.innerHTML = '&#10094;';
+
+        const next = document.createElement('button');
+        next.className = 'lightbox-arrow';
+        next.type = 'button';
+        next.innerHTML = '&#10095;';
+
+        const big = document.createElement('img');
+        big.className = 'lightbox-image';
+
+        inner.appendChild(prev);
+        inner.appendChild(big);
+        inner.appendChild(next);
+        overlay.appendChild(inner);
+
+        (root || document.body).appendChild(overlay);
+
+        prev.addEventListener('click', function(e){
+          e.stopPropagation();
+          showImage(currentIndex - 1);
+        });
+
+        next.addEventListener('click', function(e){
+          e.stopPropagation();
+          showImage(currentIndex + 1);
+        });
+
+        overlay.addEventListener('click', closeOverlay);
+        showImage(currentIndex);
+      }
+
+      // Clavier pour la lightbox
+      document.addEventListener('keydown', function(e){
+        if(!overlay) return;
+        if(e.key === 'Escape'){
+          e.preventDefault();
+          e.stopPropagation();
+          closeOverlay();
+        }else if(e.key === 'ArrowRight'){
+          e.preventDefault();
+          showImage(currentIndex + 1);
+        }else if(e.key === 'ArrowLeft'){
+          e.preventDefault();
+          showImage(currentIndex - 1);
+        }
+      });
+
+      // ---------- Carrousels ----------
+      galleries.forEach(gal=>{
+        const track = gal.querySelector('.case-gallery-track');
+        if(!track) return;
+
+        const baseSlides = Array.from(track.querySelectorAll('figure'));
+        if(!baseSlides.length) return;
+
+        const dlg = gal.closest('dialog');
+        const indicatorsContainer = gal.querySelector('.case-gallery-indicators');
+
+        const state = {
+          gal,
+          track,
+          baseSlides,
+          allSlides: [],
+          dots: [],
+          slideCount: baseSlides.length,
+          slideHeight: 0,
+          offset: 0,
+          speed: 28,
+          lastTime: null,
+          currentLogicalIndex: 0,
+          idleTimeout: null
+        };
+
+        // Création des points (indicateurs)
+        baseSlides.forEach((_, idx)=>{
+          const dot = document.createElement('button');
+          dot.type = 'button';
+          dot.className = 'case-gallery-dot';
+          dot.dataset.index = idx;
+          if(idx === 0) dot.classList.add('active');
+          indicatorsContainer.appendChild(dot);
+          state.dots.push(dot);
+        });
+
+        function setActiveDot(i){
+          state.dots.forEach(d =>
+            d.classList.toggle('active', Number(d.dataset.index) === i)
+          );
+        }
+
+        // On duplique les slides pour la boucle continue
+        baseSlides.forEach(slide=>{
+          const clone = slide.cloneNode(true);
+          track.appendChild(clone);
+        });
+
+        state.allSlides = Array.from(track.querySelectorAll('figure'));
+
+        // Hauteur homogène pour toutes les slides
+        function updateSlideHeights(){
+          // On repasse en auto pour mesurer correctement
+          state.allSlides.forEach(fig => { fig.style.height = 'auto'; });
+
+          const first = state.baseSlides[0];
+          let h;
+          if(first){
+            const rect = first.getBoundingClientRect();
+            h = rect.height || state.gal.clientHeight || 400;
+          } else {
+            h = state.gal.clientHeight || 400;
+          }
+
+          state.slideHeight = h;
+          state.allSlides.forEach(fig => {
+            fig.style.height = h + 'px';
+          });
+        }
+        state.updateSlideHeights = updateSlideHeights;
+
+        updateSlideHeights();
+        window.addEventListener('resize', updateSlideHeights);
+
+        // Mise en place du zoom plein écran
+        const imgsForZoom = Array.from(track.querySelectorAll('img'));
+        imgsForZoom.forEach(img=>{
+          img.style.cursor = 'zoom-in';
+          img.addEventListener('click', function(e){
+            e.stopPropagation();
+            if(overlay) closeOverlay();
+            openOverlayFrom(img, imgsForZoom, dlg);
+          });
+        });
+
+        function pauseAuto(){
+          state.speed = 0;
+          if(state.idleTimeout) clearTimeout(state.idleTimeout);
+          state.idleTimeout = setTimeout(()=>{
+            state.speed = 28;
+          }, 10000);
+        }
+
+        function jumpToIndex(idx){
+          if(state.slideCount === 0) return;
+          const h = state.slideHeight || state.gal.clientHeight || 400;
+          const safeIdx = ((idx % state.slideCount) + state.slideCount) % state.slideCount;
+          state.offset = -safeIdx * h;
+          state.track.style.transform = `translateY(${state.offset}px)`;
+          state.currentLogicalIndex = safeIdx;
+          setActiveDot(safeIdx);
+        }
+        state.jumpToIndex = jumpToIndex;
+
+        // Clic sur les points : on aligne parfaitement sur l'image ciblée
+        state.dots.forEach(dot=>{
+          dot.addEventListener('click', ()=>{
+            const idx = Number(dot.dataset.index) || 0;
+            pauseAuto();
+            jumpToIndex(idx);
+          });
+        });
+
+        // Animation continue
+        function step(timestamp){
+          if(!document.body.contains(gal)) return; // sécurité si la modale est retirée du DOM
+
+          if(state.lastTime == null) state.lastTime = timestamp;
+          const dt = (timestamp - state.lastTime) / 1000;
+          state.lastTime = timestamp;
+
+          if(state.speed !== 0 && state.slideCount > 0){
+            const h = state.slideHeight || state.gal.clientHeight || 400;
+            const loopHeight = state.slideCount * h;
+
+            state.offset -= state.speed * dt;
+            if(state.offset <= -loopHeight){
+              state.offset += loopHeight;
+            }
+            state.track.style.transform = `translateY(${state.offset}px)`;
+
+            let norm = -state.offset;
+            if(norm < 0) norm += loopHeight;
+            const approxIndex = Math.round(norm / h) % state.slideCount;
+            if(approxIndex !== state.currentLogicalIndex){
+              state.currentLogicalIndex = approxIndex;
+              setActiveDot(approxIndex);
+            }
+          }
+
+          requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+
+        galleryStates.set(gal, state);
+      });
+
+      // Reset du carrousel quand on ouvre une modale
+      function resetCarouselForDialog(dlg){
+        const gal = dlg.querySelector('.case-gallery');
+        if(!gal) return;
+        const state = galleryStates.get(gal);
+        if(!state) return;
+
+        state.updateSlideHeights();
+
+        state.offset = 0;
+        state.lastTime = null;
+        state.currentLogicalIndex = 0;
+        state.speed = 28;
+        state.track.style.transform = 'translateY(0px)';
+
+        if(state.dots && state.dots.length){
+          state.dots.forEach((d,i) => d.classList.toggle('active', i === 0));
+        }
+      }
+
+      // Rend la fonction dispo pour le code des modales
+      window.__resetCarouselForDialog = resetCarouselForDialog;
+    })();
+  </script>
+</body>
+</html>
